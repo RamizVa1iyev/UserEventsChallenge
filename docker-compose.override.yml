@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  usereventschallenge.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  s_mysqldb:
+    environment:
+      MYSQL_DATABASE: 'UserEventsDb'
+      MYSQL_USER: 'sa'
+      MYSQL_PASSWORD: 'admin123'
+      MYSQL_ROOT_PASSWORD: 'admin123'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - mysqldb:/var/lib/mysql
+
+volumes:
+  mysqldb:

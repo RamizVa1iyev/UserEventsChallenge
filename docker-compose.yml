@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  usereventschallenge.api:
+    image: ${DOCKER_REGISTRY-}usereventschallengeapi
+    build:
+      context: .
+      dockerfile: UserEventsChallenge.API/Dockerfile
+  s_mysqldb:
+    container_name: c_mysqldb
+    image: mysql:5.7
